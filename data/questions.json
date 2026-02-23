@@ -1,0 +1,296 @@
+[
+  {
+    "id": "eq-1", "topic": "rovnice", "topicLabel": "Rovnice (jednoduché)", "difficulty": 1,
+    "text": "Vypočítaj: 2x + 5 = 13",
+    "hints": ["Skús odčítať 5 z oboch strán rovnice.", "Po odčítaní dostaneš 2x = 8. Teraz deli obe strany číslom 2."],
+    "answer": "x = 4"
+  },
+  {
+    "id": "eq-2", "topic": "rovnice", "topicLabel": "Rovnice (jednoduché)", "difficulty": 1,
+    "text": "Vypočítaj: 3x - 4 = 11",
+    "hints": ["Pridaj 4 k obom stranám.", "Po pridaní dostaneš 3x = 15."],
+    "answer": "x = 5"
+  },
+  {
+    "id": "eq-3", "topic": "rovnice", "topicLabel": "Rovnice (jednoduché)", "difficulty": 1,
+    "text": "Vypočítaj: 5x + 3 = 2x + 12",
+    "hints": ["Presuň x na jednu stranu: odčítaj 2x z oboch strán.", "Dostaneš 3x + 3 = 12, teraz odčítaj 3."],
+    "answer": "x = 3"
+  },
+  {
+    "id": "eq-4", "topic": "rovnice", "topicLabel": "Rovnice (jednoduché)", "difficulty": 1,
+    "text": "Vypočítaj: 4(x + 2) = 20",
+    "hints": ["Najprv rozviň závorku: 4·x + 4·2 = 20.", "Dostaneš 4x + 8 = 20. Odčítaj 8."],
+    "answer": "x = 3"
+  },
+  {
+    "id": "eq-5", "topic": "rovnice", "topicLabel": "Rovnice (jednoduché)", "difficulty": 2,
+    "text": "Vypočítaj: 2(3x - 1) = 4x + 6",
+    "hints": ["Rozviň závorku: 6x - 2 = 4x + 6.", "Presuň x na ľavú stranu, čísla na pravú."],
+    "answer": "x = 4"
+  },
+  {
+    "id": "eq-6", "topic": "rovnice", "topicLabel": "Rovnice (jednoduché)", "difficulty": 1,
+    "text": "Vypočítaj: x/3 = 5",
+    "hints": ["Obe strany vynásob číslom 3.", "x = 5 · 3"],
+    "answer": "x = 15"
+  },
+  {
+    "id": "eq-7", "topic": "rovnice", "topicLabel": "Rovnice (jednoduché)", "difficulty": 2,
+    "text": "Vypočítaj: 7x - 3 = 4x + 9",
+    "hints": ["Odčítaj 4x z oboch strán.", "Dostaneš 3x - 3 = 9."],
+    "answer": "x = 4"
+  },
+  {
+    "id": "eq-8", "topic": "rovnice", "topicLabel": "Rovnice (jednoduché)", "difficulty": 2,
+    "text": "Vypočítaj: 6 - 2x = x - 6",
+    "hints": ["Presuň x na pravú stranu: 6 = x - 6 + 2x.", "Dostaneš 6 = 3x - 6, pridaj 6."],
+    "answer": "x = 4"
+  },
+  {
+    "id": "frac-1", "topic": "zlomky", "topicLabel": "Rovnice so zlomkami", "difficulty": 1,
+    "text": "Vypočítaj: x/2 + 3 = 7",
+    "hints": ["Odčítaj 3 z oboch strán: x/2 = 4.", "Vynásob obe strany číslom 2."],
+    "answer": "x = 8"
+  },
+  {
+    "id": "frac-2", "topic": "zlomky", "topicLabel": "Rovnice so zlomkami", "difficulty": 1,
+    "text": "Vypočítaj: 3x/4 - 1 = 5",
+    "hints": ["Pridaj 1 k obom stranám: 3x/4 = 6.", "Vynásob 4, potom deli 3."],
+    "answer": "x = 8"
+  },
+  {
+    "id": "frac-3", "topic": "zlomky", "topicLabel": "Rovnice so zlomkami", "difficulty": 2,
+    "text": "Vypočítaj: x/3 + x/2 = 5",
+    "hints": ["Spoločný menovateľ pre 3 a 2 je 6.", "Prepíš: 2x/6 + 3x/6 = 5, čiže 5x/6 = 5."],
+    "answer": "x = 6"
+  },
+  {
+    "id": "frac-4", "topic": "zlomky", "topicLabel": "Rovnice so zlomkami", "difficulty": 2,
+    "text": "Vypočítaj: 3k/3 + 7/3 + 1 = 5 + 2k/2",
+    "hints": ["Spoločný menovateľ je 6. Vynásob celú rovnicu číslom 6.", "Po vynásobení: 6k + 14 + 6 = 30 + 6k."],
+    "answer": "k = 2"
+  },
+  {
+    "id": "frac-5", "topic": "zlomky", "topicLabel": "Rovnice so zlomkami", "difficulty": 2,
+    "text": "Vypočítaj: (2x+1)/3 = (x+4)/2",
+    "hints": ["Spoločný menovateľ je 6. Vynásob obe strany číslom 6.", "Dostaneš 2(2x+1) = 3(x+4)."],
+    "answer": "x = 10"
+  },
+  {
+    "id": "frac-6", "topic": "zlomky", "topicLabel": "Rovnice so zlomkami", "difficulty": 2,
+    "text": "Vypočítaj: x/4 + 2 = x/2 - 1",
+    "hints": ["Presuň x na jednu stranu: x/4 - x/2 = -3.", "Spoločný menovateľ je 4: x/4 - 2x/4 = -3."],
+    "answer": "x = 12"
+  },
+  {
+    "id": "frac-7", "topic": "zlomky", "topicLabel": "Rovnice so zlomkami", "difficulty": 2,
+    "text": "Vypočítaj: (x-3)/2 + 1 = (x+1)/4",
+    "hints": ["Vynásob obe strany číslom 4.", "Dostaneš 2(x-3) + 4 = x+1."],
+    "answer": "x = -7"
+  },
+  {
+    "id": "word-1", "topic": "slovne", "topicLabel": "Slovné úlohy", "difficulty": 2,
+    "text": "Sponzor venoval škole peniaze. Škola z nich tretinu použila na nákup pomôcok a polovicu zvyšku na úpravu ihriska. Zostalo jej 5 000 eur. Koľko eur venoval sponzor škole?",
+    "hints": ["Nech x = celková suma. Tretina = x/3. Zostatok po prvom míňaní = 2x/3.", "Z 2x/3 sa minula polovica, teda zostala štvrtina x. Štvrtina x = 5000."],
+    "answer": "20 000 €"
+  },
+  {
+    "id": "word-2", "topic": "slovne", "topicLabel": "Slovné úlohy", "difficulty": 1,
+    "text": "Janka má 3-krát viac nálepiek ako Mária. Spolu majú 48 nálepiek. Koľko nálepiek má každá?",
+    "hints": ["Nech Mária má x nálepiek. Janka má 3x.", "Spolu: x + 3x = 48."],
+    "answer": "Mária má 12, Janka má 36 nálepiek."
+  },
+  {
+    "id": "word-3", "topic": "slovne", "topicLabel": "Slovné úlohy", "difficulty": 1,
+    "text": "Číslo zväčšíme o 15 a výsledok podelíme 4. Dostaneme 10. Aké je hľadané číslo?",
+    "hints": ["Nech hľadané číslo = x. Rovnica: (x + 15) / 4 = 10.", "Vynásob obe strany 4."],
+    "answer": "x = 25"
+  },
+  {
+    "id": "word-4", "topic": "slovne", "topicLabel": "Slovné úlohy", "difficulty": 2,
+    "text": "Otec je teraz 3-krát starší ako syn. O 10 rokov bude otec 2-krát starší ako syn. Koľko rokov má teraz každý?",
+    "hints": ["Nech syn má teraz x rokov. Otec má 3x.", "O 10 rokov: syn = x+10, otec = 3x+10. Rovnica: 3x+10 = 2(x+10)."],
+    "answer": "Syn má 10 rokov, otec má 30 rokov."
+  },
+  {
+    "id": "word-5", "topic": "slovne", "topicLabel": "Slovné úlohy", "difficulty": 2,
+    "text": "Obdĺžnik má obvod 56 cm. Dĺžka je o 8 cm väčšia ako šírka. Vypočítaj rozmery obdĺžnika.",
+    "hints": ["Nech šírka = x. Dĺžka = x + 8.", "Obvod: 2(x + x + 8) = 56."],
+    "answer": "Šírka = 10 cm, dĺžka = 18 cm."
+  },
+  {
+    "id": "word-6", "topic": "slovne", "topicLabel": "Slovné úlohy", "difficulty": 1,
+    "text": "Auto prešlo za 3 hodiny 210 km. Aká bola jeho priemerná rýchlosť?",
+    "hints": ["Rýchlosť = vzdialenosť ÷ čas.", "v = 210 ÷ 3"],
+    "answer": "v = 70 km/h"
+  },
+  {
+    "id": "tri-1", "topic": "trojuholnik", "topicLabel": "Zostrojenie trojuholníka", "difficulty": 1,
+    "text": "Zostrojte trojuholník ABC so stranami: a = 5 cm, b = 7 cm, c = 8 cm. (Konštrukcia SSS)",
+    "hints": ["Narysuj základňu c = 8 cm. Označ krajné body A a B.", "Kružidlom so stredom A narysuj oblúk s polomerom b = 7 cm, zo stredu B s polomerom a = 5 cm."],
+    "answer": "Trojuholník ABC s danými stranami zostrojený metódou SSS."
+  },
+  {
+    "id": "tri-2", "topic": "trojuholnik", "topicLabel": "Zostrojenie trojuholníka", "difficulty": 1,
+    "text": "Zostrojte rovnostranný trojuholník so stranou 5 cm.",
+    "hints": ["Rovnostranný trojuholník má všetky 3 strany rovnako dlhé.", "Narysuj úsečku AB = 5 cm, potom kružidlom so stredom A a B narysuj oblúky s polomerom 5 cm."],
+    "answer": "Rovnostranný trojuholník so všetkými stranami 5 cm."
+  },
+  {
+    "id": "tri-3", "topic": "trojuholnik", "topicLabel": "Zostrojenie trojuholníka", "difficulty": 2,
+    "text": "Zostrojte pravouhlý trojuholník, kde prepona c = 10 cm a odvesna a = 6 cm.",
+    "hints": ["Pravý uhol je oproti prepone c.", "Narysuj odvesnu a = 6 cm. Kolmo na ňu stavia druhá odvesna."],
+    "answer": "Pravouhlý trojuholník s preponou 10 cm a odvenou 6 cm (druhá odvesna = 8 cm)."
+  },
+  {
+    "id": "tri-4", "topic": "trojuholnik", "topicLabel": "Zostrojenie trojuholníka", "difficulty": 2,
+    "text": "Zostrojte trojuholník ABC: strana c = 7 cm, uhol α = 45°, uhol β = 60°. (Konštrukcia ASA)",
+    "hints": ["Narysuj základňu c = 7 cm. Bod A je vľavo, B vpravo.", "Na bode A narysuj uhol 45°, na bode B uhol 60°. Ramená sa stretnú v bode C."],
+    "answer": "Trojuholník ABC zostrojený metódou ASA."
+  },
+  {
+    "id": "tri-5", "topic": "trojuholnik", "topicLabel": "Zostrojenie trojuholníka", "difficulty": 2,
+    "text": "Zostrojte trojuholník ABC: a = 6 cm, uhol β = 60°, b = 8 cm. (Konštrukcia SUS)",
+    "hints": ["Narysuj stranu a = 6 cm (od B po C).", "Na bode B narysuj uhol 60° a na tomto ramene odmeraj b = 8 cm — to je bod A."],
+    "answer": "Trojuholník ABC zostrojený metódou SUS."
+  },
+  {
+    "id": "stvor-1", "topic": "stvoruholnik", "topicLabel": "Štvorec a obdĺžnik", "difficulty": 1,
+    "text": "Obdĺžnik má strany a = 12 cm a b = 8 cm. Vypočítaj jeho obvod a obsah.",
+    "hints": ["Obvod obdĺžnika = 2 · (a + b).", "Obsah obdĺžnika = a · b."],
+    "answer": "Obvod = 40 cm, obsah = 96 cm²."
+  },
+  {
+    "id": "stvor-2", "topic": "stvoruholnik", "topicLabel": "Štvorec a obdĺžnik", "difficulty": 1,
+    "text": "Štvorec má stranu 6 cm. Vypočítaj jeho obvod a obsah.",
+    "hints": ["Obvod štvorca = 4 · strana.", "Obsah štvorca = strana · strana = strana²."],
+    "answer": "Obvod = 24 cm, obsah = 36 cm²."
+  },
+  {
+    "id": "stvor-3", "topic": "stvoruholnik", "topicLabel": "Štvorec a obdĺžnik", "difficulty": 1,
+    "text": "Obsah obdĺžnika je 72 cm². Šírka je 8 cm. Aká je jeho dĺžka?",
+    "hints": ["Obsah = dĺžka · šírka, čiže dĺžka = obsah ÷ šírka.", "dĺžka = 72 ÷ 8"],
+    "answer": "Dĺžka = 9 cm."
+  },
+  {
+    "id": "stvor-4", "topic": "stvoruholnik", "topicLabel": "Štvorec a obdĺžnik", "difficulty": 1,
+    "text": "Záhrada má tvar obdĺžnika so stranami 15 m a 10 m. Koľko metrov oplotenia treba na jej ohradenie?",
+    "hints": ["Oplotenie = obvod záhrady.", "Obvod = 2 · (15 + 10)."],
+    "answer": "Treba 50 m oplotenia."
+  },
+  {
+    "id": "stvor-5", "topic": "stvoruholnik", "topicLabel": "Štvorec a obdĺžnik", "difficulty": 2,
+    "text": "Štvorec má obsah 81 cm². Aká je dĺžka jeho strany?",
+    "hints": ["Obsah štvorca = strana². Teda strana = √obsah.", "Aké číslo krát samo seba dá 81?"],
+    "answer": "Strana = 9 cm."
+  },
+  {
+    "id": "stvor-6", "topic": "stvoruholnik", "topicLabel": "Štvorec a obdĺžnik", "difficulty": 2,
+    "text": "Podlaha má tvar obdĺžnika 6 m × 4 m. Koľko štvorcových dlaždíc s rozmermi 20 cm × 20 cm treba na jej vydláždenie?",
+    "hints": ["Obsah podlahy v cm²: 600 cm × 400 cm = 240 000 cm².", "Obsah jednej dlaždice = 20 × 20 = 400 cm². Počet = 240 000 ÷ 400."],
+    "answer": "Treba 600 dlaždíc."
+  },
+  {
+    "id": "stvor-7", "topic": "stvoruholnik", "topicLabel": "Štvorec a obdĺžnik", "difficulty": 2,
+    "text": "Obdĺžnik má dĺžku rovnú dvojnásobku šírky. Jeho obvod je 60 cm. Vypočítaj rozmery.",
+    "hints": ["Nech šírka = x. Dĺžka = 2x.", "Obvod: 2(x + 2x) = 60, čiže 6x = 60."],
+    "answer": "Šírka = 10 cm, dĺžka = 20 cm."
+  },
+  {
+    "id": "lico-1", "topic": "lichobeznik", "topicLabel": "Lichobežník", "difficulty": 1,
+    "text": "Lichobežník má základne a = 10 cm a c = 6 cm, výška h = 4 cm. Vypočítaj jeho obsah.",
+    "hints": ["Obsah lichobežníka = (a + c) / 2 · h.", "S = (10 + 6) / 2 · 4"],
+    "answer": "Obsah = 32 cm²."
+  },
+  {
+    "id": "lico-2", "topic": "lichobeznik", "topicLabel": "Lichobežník", "difficulty": 1,
+    "text": "Vypočítaj obvod lichobežníka so stranami a = 9 cm, b = 5 cm, c = 6 cm, d = 5 cm.",
+    "hints": ["Obvod = súčet všetkých 4 strán.", "o = a + b + c + d"],
+    "answer": "Obvod = 25 cm."
+  },
+  {
+    "id": "lico-3", "topic": "lichobeznik", "topicLabel": "Lichobežník", "difficulty": 2,
+    "text": "Obsah lichobežníka je 40 cm², výška h = 5 cm, dlhšia základňa a = 10 cm. Vypočítaj kratšiu základňu c.",
+    "hints": ["Obsah = (a + c) / 2 · h. Dosad: 40 = (10 + c) / 2 · 5.", "Upravíme: 40 = (10 + c) · 2,5, čiže 10 + c = 16."],
+    "answer": "c = 6 cm."
+  },
+  {
+    "id": "lico-4", "topic": "lichobeznik", "topicLabel": "Lichobežník", "difficulty": 2,
+    "text": "Lichobežník má základne a = 12 cm a c = 8 cm, výška h = 6 cm. Vypočítaj obsah.",
+    "hints": ["Obsah = (a + c) / 2 · h.", "S = (12 + 8) / 2 · 6"],
+    "answer": "Obsah = 60 cm²."
+  },
+  {
+    "id": "lico-5", "topic": "lichobeznik", "topicLabel": "Lichobežník", "difficulty": 2,
+    "text": "Zostrojte lichobežník ABCD: a = 8 cm, c = 5 cm, ramená b = d = 4 cm.",
+    "hints": ["Narysuj základňu a = 8 cm (AB). Nad ňou musí byť c = 5 cm rovnobežne.", "Z bodu A odmeraj rameno b = 4 cm pod uhlom. Z B odmeraj d = 4 cm."],
+    "answer": "Lichobežník ABCD zostrojený s danými rozmermi."
+  },
+  {
+    "id": "obs-1", "topic": "obvod", "topicLabel": "Obvod a obsah", "difficulty": 1,
+    "text": "Vypočítaj obsah trojuholníka so základňou a = 10 cm a výškou ha = 6 cm.",
+    "hints": ["Obsah trojuholníka = (základňa · výška) / 2.", "S = (10 · 6) / 2"],
+    "answer": "Obsah = 30 cm²."
+  },
+  {
+    "id": "obs-2", "topic": "obvod", "topicLabel": "Obvod a obsah", "difficulty": 1,
+    "text": "Trojuholník má obsah 24 cm² a základňu a = 8 cm. Vypočítaj výšku ha.",
+    "hints": ["Obsah = (a · ha) / 2. Teda ha = (2 · obsah) / a.", "ha = (2 · 24) / 8"],
+    "answer": "ha = 6 cm."
+  },
+  {
+    "id": "obs-3", "topic": "obvod", "topicLabel": "Obvod a obsah", "difficulty": 2,
+    "text": "Záhrada má tvar pravouhlého trojuholníka so odvesnami 6 m a 8 m. Vypočítaj obvod a obsah záhrady.",
+    "hints": ["Prepona: c² = 6² + 8² = 100, c = 10 m.", "Obvod = 6 + 8 + 10. Obsah = (6 · 8) / 2."],
+    "answer": "Obvod = 24 m, obsah = 24 m²."
+  },
+  {
+    "id": "obs-4", "topic": "obvod", "topicLabel": "Obvod a obsah", "difficulty": 2,
+    "text": "Koľko kg farby treba na natretie steny 5 m × 3 m, ak 1 kg farby stačí na 5 m²?",
+    "hints": ["Obsah steny = 5 · 3 = 15 m².", "Potrebná farba = obsah ÷ vydatnosť = 15 ÷ 5."],
+    "answer": "Treba 3 kg farby."
+  },
+  {
+    "id": "obs-5", "topic": "obvod", "topicLabel": "Obvod a obsah", "difficulty": 2,
+    "text": "Okolo obdĺžnikovej záhrady 10 m × 8 m vedie chodník šírky 1 m. Vypočítaj obsah chodníka.",
+    "hints": ["Celkový obdĺžnik (záhrada + chodník): (10+2) × (8+2) = 12 × 10 = 120 m².", "Obsah záhrady = 10 × 8 = 80 m². Obsah chodníka = 120 - 80."],
+    "answer": "Obsah chodníka = 40 m²."
+  },
+  {
+    "id": "obs-6", "topic": "obvod", "topicLabel": "Obvod a obsah", "difficulty": 1,
+    "text": "Vypočítaj obvod trojuholníka so stranami 5 cm, 7 cm a 9 cm.",
+    "hints": ["Obvod trojuholníka = súčet všetkých troch strán.", "o = 5 + 7 + 9"],
+    "answer": "Obvod = 21 cm."
+  },
+  {
+    "id": "vys-1", "topic": "vyska", "topicLabel": "Výška v trojuholníku", "difficulty": 1,
+    "text": "Narysujte trojuholník ABC so stranami a = 6 cm, b = 5 cm, c = 7 cm a zostrojte výšku z vrchola B na stranu b.",
+    "hints": ["Najprv zostrojte trojuholník metódou SSS.", "Výška z B je kolmica z bodu B na priamku b (strana AC)."],
+    "answer": "Výška hb zostrojená kolmo z B na stranu AC."
+  },
+  {
+    "id": "vys-2", "topic": "vyska", "topicLabel": "Výška v trojuholníku", "difficulty": 1,
+    "text": "Trojuholník má obsah S = 30 cm² a základňu a = 10 cm. Vypočítaj výšku ha.",
+    "hints": ["S = (a · ha) / 2. Teda ha = 2S / a.", "ha = 2 · 30 / 10"],
+    "answer": "ha = 6 cm."
+  },
+  {
+    "id": "vys-3", "topic": "vyska", "topicLabel": "Výška v trojuholníku", "difficulty": 2,
+    "text": "Zostrojte pravouhlý trojuholník ABC (pravý uhol pri C) s odvesenami a = 4 cm, b = 3 cm. Narysujte výšku na preponu.",
+    "hints": ["Prepona c = 5 cm (Pythagorova veta). Zostrojte trojuholník.", "Výška na preponu ide z vrchola C kolmo na AB."],
+    "answer": "Výška hc zostrojená kolmo z C na preponu AB."
+  },
+  {
+    "id": "vys-4", "topic": "vyska", "topicLabel": "Výška v trojuholníku", "difficulty": 2,
+    "text": "Zostrojte ľubovoľný tupouhlý trojuholník a narysujte všetky tri výšky. Kde sa pretínajú?",
+    "hints": ["Pri tupouhlom trojuholníku niektoré výšky smerujú von z trojuholníka.", "Všetky tri výšky sa vždy pretínajú v jednom bode — ortocentre."],
+    "answer": "Všetky tri výšky sa pretínajú v ortocentre, ktoré leží vne tupouhlého trojuholníka."
+  },
+  {
+    "id": "vys-5", "topic": "vyska", "topicLabel": "Výška v trojuholníku", "difficulty": 1,
+    "text": "Vypočítaj výšku trojuholníka, ak obsah S = 45 cm² a základňa a = 9 cm.",
+    "hints": ["S = (a · ha) / 2, teda ha = 2S / a.", "ha = 2 · 45 / 9"],
+    "answer": "ha = 10 cm."
+  }
+]
