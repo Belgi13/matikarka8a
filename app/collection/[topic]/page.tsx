@@ -3,12 +3,13 @@ import { getByTopic, TOPICS } from '@/lib/questions'
 import { getTheoryByTopic } from '@/data/theory'
 import { notFound } from 'next/navigation'
 
-export default function TopicPage({ params }: { params: { topic: string } }) {
-  const topicMeta = TOPICS.find((t) => t.id === params.topic)
+export default async function TopicPage({ params }: { params: Promise<{ topic: string }> }) {
+  const { topic } = await params
+  const topicMeta = TOPICS.find((t) => t.id === topic)
   if (!topicMeta) notFound()
 
-  const questions = getByTopic(params.topic)
-  const theoryLinks = getTheoryByTopic(params.topic)
+  const questions = getByTopic(topic)
+  const theoryLinks = getTheoryByTopic(topic)
 
   return (
     <div className="py-6">

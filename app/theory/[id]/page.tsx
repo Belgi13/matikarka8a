@@ -5,8 +5,9 @@ import TheoryShapeCard from '@/components/TheoryShapeCard'
 import TheoryImageToggle from '@/components/TheoryImageToggle'
 import TheoryQAPanel from '@/components/TheoryQAPanel'
 
-export default function TheoryDetailPage({ params }: { params: { id: string } }) {
-  const section = getTheoryById(params.id)
+export default async function TheoryDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const section = getTheoryById(id)
   if (!section) notFound()
 
   return (
