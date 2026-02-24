@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Matikárka 8A
 
-## Getting Started
+Matikárka je Next.js aplikácia pre žiačku 8. ročníka, navrhnutá na trpezlivé vysvetľovanie matematiky krok za krokom v slovenčine. Kombinuje AI riešenie príkladov, precvičovanie, tematickú zbierku úloh, teóriu a lokálnu históriu vyriešených príkladov.
 
-First, run the development server:
+## Hlavné funkcie
+
+- `Vyriešiť` (`/solve`)
+- zadanie príkladu textom alebo nahraním fotky
+- AI vráti štruktúrované riešenie (`co_vieme`, `hladame`, kroky, odpoveď, pochvala)
+- postupné odhaľovanie krokov alebo „ukáž všetko naraz“
+- uloženie výsledku do lokálnej histórie
+
+- `Precvičiť` (`/practice`)
+- výber témy a obtiažnosti (1 alebo 2 hviezdičky)
+- sada otázok z lokálneho datasetu (max 5 na session)
+- AI validácia odpovede, nápovedy a zobrazenie riešenia po opakovaných pokusoch
+- súhrn skóre po dokončení
+
+- `Zbierka príkladov` (`/collection`)
+- tematický prehľad úloh
+- rýchly prechod na „Vyriešiť“ alebo „Precvičiť“ s konkrétnou otázkou
+
+- `Teória` (`/theory`)
+- sekcie so vzorcami a vlastnosťami tvarov
+- prepínanie pôvodného obrázka zo zošita
+- Q&A panel nad teóriou (AI odpovedá na otázky k zobrazenému obrázku)
+
+- `História` (`/history`)
+- lokálne uložené príklady (LocalStorage)
+- filtrovanie podľa témy
+- detail kroku riešenia
+
+## Tech stack
+
+- Framework: Next.js 16 (App Router)
+- Jazyk: TypeScript, React 19
+- Styling: Tailwind CSS 4
+- Animácie/UI: Framer Motion, canvas-confetti, react-dropzone
+- AI: OpenAI SDK (`gpt-4o`)
+- Testy: Jest + Testing Library
+- Deployment config: Netlify (`@netlify/plugin-nextjs`)
+
+## Rýchly štart
+
+### 1) Požiadavky
+
+- Node.js 20+
+- npm
+- OpenAI API kľúč
+
+### 2) Inštalácia
+
+```bash
+npm install
+```
+
+### 3) Environment
+
+Vytvor `.env.local`:
+
+```bash
+OPENAI_API_KEY=your_openai_api_key
+# voliteľné hlavne pre deployment/theory image fetch v API route:
+URL=http://localhost:3000
+```
+
+### 4) Spustenie
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Aplikácia beží na [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Skripty
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev       # vývoj
+npm run build     # produkčný build
+npm run start     # spustenie buildu
+npm run lint      # eslint
+npm test          # jest
+npm run test:watch
+```
 
-## Learn More
+## Dáta a architektúra
 
-To learn more about Next.js, take a look at the following resources:
+- otázky: `data/questions.json` (49 úloh, 8 tém)
+- teória: `data/theory.ts` (sekcie, tvary, vzorce, odkazy na obrázky)
+- hlavná logika práce s otázkami: `lib/questions.ts`
+- prompt engineering pre AI: `lib/prompts.ts`
+- lokálna história: `lib/history.ts`
+- API routes:
+- `POST /api/solve`
+- `POST /api/solve-image`
+- `POST /api/validate`
+- `POST /api/theory-qa`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Testovanie a kvalita
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Aktuálny stav v tomto repozitári:
 
-## Deploy on Vercel
+- `npm test` ✅ (7 test suites, 25 testov)
+- `npm run lint` ✅
+- `npm run build` ✅
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Poznámky
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Históriu riešení aplikácia ukladá iba do prehliadača používateľa.
+- API route `/api/theory-qa` načítava obrázok cez `URL` (fallback `http://localhost:3000`). Pri nasadení nastavte správnu verejnú URL aplikácie.
