@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { getByTopic, TOPICS } from '@/lib/questions'
 import { getTheoryByTopic } from '@/data/theory'
 import { notFound } from 'next/navigation'
+import TopicIcon from '@/components/TopicIcon'
+import { ArrowLeft, ArrowRight, BookOpen, Star } from 'react-feather'
 
 export default async function TopicPage({ params }: { params: Promise<{ topic: string }> }) {
   const { topic } = await params
@@ -13,8 +15,8 @@ export default async function TopicPage({ params }: { params: Promise<{ topic: s
 
   return (
     <div className="py-6">
-      <Link href="/collection" className="text-[#6D28D9] font-semibold mb-4 flex items-center gap-1">
-        ← Zbierka
+      <Link href="/collection" className="text-[#6D28D9] font-semibold mb-4 flex items-center gap-2">
+        <ArrowLeft size={16} /> Zbierka
       </Link>
 
       {theoryLinks.length > 0 && (
@@ -25,25 +27,31 @@ export default async function TopicPage({ params }: { params: Promise<{ topic: s
               href={`/theory/${section.id}`}
               className="flex items-center gap-3 bg-[#EEF2FF] border border-[#DDD6FE] rounded-2xl px-4 py-3 hover:bg-[#DDD6FE] transition-colors"
             >
-              <span className="text-xl">📖</span>
+              <BookOpen size={18} className="text-[#6D28D9]" />
               <div className="flex-1">
                 <p className="text-[15px] font-semibold text-[#6D28D9]">Teória k tejto téme</p>
                 <p className="text-[13px] text-[#4338CA]">{section.title}</p>
               </div>
-              <span className="text-[#6D28D9]">→</span>
+              <ArrowRight size={16} className="text-[#6D28D9]" />
             </Link>
           ))}
         </div>
       )}
 
-      <h1 className="text-[24px] font-bold text-[#111827] mb-6">
-        {topicMeta.icon} {topicMeta.label}
+      <h1 className="text-[24px] font-bold text-[#111827] mb-6 flex items-center gap-3">
+        <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#EEF2FF] text-[#6D28D9]">
+          <TopicIcon topicId={topicMeta.id} />
+        </span>
+        {topicMeta.label}
       </h1>
       <div className="flex flex-col gap-3">
         {questions.map((q) => (
           <div key={q.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
             <div className="flex items-center gap-2 mb-2">
-              <span className="text-yellow-400">{q.difficulty === 1 ? '⭐' : '⭐⭐'}</span>
+              <span className="text-yellow-400 inline-flex items-center gap-1">
+                <Star size={12} fill="currentColor" />
+                {q.difficulty === 2 && <Star size={12} fill="currentColor" />}
+              </span>
               <span className="text-xs text-gray-400">{q.difficulty === 1 ? 'Ľahší' : 'Ťažší'}</span>
             </div>
             <p className="text-[16px] text-[#111827] mb-3 leading-relaxed">{q.text}</p>

@@ -2,35 +2,53 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { Activity, BookOpen, Clock, Grid, Search } from 'react-feather'
 
 const TABS = [
-  { href: '/solve',      icon: '🔍', label: 'Vyriešiť'  },
-  { href: '/collection', icon: '📚', label: 'Zbierka'   },
-  { href: '/practice',   icon: '🏋️', label: 'Precvičiť' },
-  { href: '/theory',     icon: '📖', label: 'Teória'    },
-  { href: '/history',    icon: '🕐', label: 'História'  },
+  { href: '/solve', icon: Search, label: 'Vyriešiť' },
+  { href: '/collection', icon: Grid, label: 'Zbierka' },
+  { href: '/practice', icon: Activity, label: 'Precvičiť' },
+  { href: '/theory', icon: BookOpen, label: 'Teória' },
+  { href: '/history', icon: Clock, label: 'História' },
 ]
 
 export default function BottomNav() {
   const pathname = usePathname()
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 shadow-[0_-2px_8px_rgba(0,0,0,0.06)]">
-      <div className="max-w-2xl mx-auto flex justify-around">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 px-3 pb-3 pt-2">
+      <div className="max-w-2xl mx-auto rounded-[22px] border border-white/65 bg-white/85 backdrop-blur-md shadow-[var(--shadow-nav)]">
+        <div className="flex justify-around">
         {TABS.map((tab) => {
           const isActive = pathname.startsWith(tab.href)
+          const Icon = tab.icon
           return (
             <Link
               key={tab.href}
               href={tab.href}
-              className={`flex flex-col items-center flex-1 py-2 px-1 text-xs font-medium transition-colors ${
-                isActive ? 'text-[#6D28D9]' : 'text-gray-500 hover:text-[#6D28D9]'
+              aria-label={tab.label}
+              className={`relative flex flex-col items-center flex-1 py-2.5 px-1 text-[11px] font-semibold rounded-[18px] transition-all duration-200 ${
+                isActive
+                  ? 'text-[var(--brand-primary)]'
+                  : 'text-[var(--text-muted)] hover:text-[var(--brand-primary)]'
               }`}
             >
-              <span className="text-2xl mb-1 leading-none">{tab.icon}</span>
-              <span>{tab.label}</span>
+              {isActive && (
+                <span className="absolute inset-x-3 -top-0.5 h-0.5 rounded-full bg-[var(--brand-primary)]" />
+              )}
+              <span
+                className={`mb-1 rounded-xl p-1.5 transition-all duration-200 ${
+                  isActive
+                    ? 'bg-[var(--bg-surface-2)] shadow-[var(--shadow-soft)]'
+                    : 'bg-transparent'
+                }`}
+              >
+                <Icon size={18} />
+              </span>
+              <span className="leading-none">{tab.label}</span>
             </Link>
           )
         })}
+        </div>
       </div>
     </nav>
   )

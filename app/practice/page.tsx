@@ -3,6 +3,8 @@
 import { useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { getByTopicAndDifficulty, getById, TOPICS } from '@/lib/questions'
+import TopicIcon from '@/components/TopicIcon'
+import { AlertCircle, ArrowLeft, ArrowRight, Award, CheckCircle, HelpCircle, RefreshCw } from 'react-feather'
 import type { Question } from '@/lib/types'
 
 type PracticeState = 'select-topic' | 'select-difficulty' | 'question' | 'summary'
@@ -87,7 +89,9 @@ function PracticePageInner() {
               onClick={() => { setTopic(t.id); setPracticeState('select-difficulty') }}
               className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 text-center hover:border-[#6D28D9] transition-all active:scale-95"
             >
-              <p className="text-3xl mb-1">{t.icon}</p>
+              <span className="mx-auto mb-2 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#EEF2FF] text-[#6D28D9]">
+                <TopicIcon topicId={t.id} size={18} />
+              </span>
               <p className="text-[14px] font-semibold text-[#111827] leading-tight">{t.label}</p>
             </button>
           ))}
@@ -99,14 +103,14 @@ function PracticePageInner() {
   if (practiceState === 'select-difficulty') {
     return (
       <div className="py-6">
-        <button onClick={() => setPracticeState('select-topic')} className="text-[#6D28D9] font-semibold mb-6">← Späť</button>
+        <button onClick={() => setPracticeState('select-topic')} className="text-[#6D28D9] font-semibold mb-6 inline-flex items-center gap-2"><ArrowLeft size={16} />Späť</button>
         <h2 className="text-[22px] font-bold mb-6">Vyber obtiažnosť:</h2>
         <div className="flex flex-col gap-4">
           <button onClick={() => startSession(topic, 1)} className="w-full py-6 bg-white rounded-2xl border-2 border-gray-200 hover:border-[#6D28D9] text-[18px] font-semibold transition-all">
-            ⭐ Ľahšie
+            Ľahšie
           </button>
           <button onClick={() => startSession(topic, 2)} className="w-full py-6 bg-white rounded-2xl border-2 border-gray-200 hover:border-[#6D28D9] text-[18px] font-semibold transition-all">
-            ⭐⭐ Ťažšie
+            Ťažšie
           </button>
         </div>
       </div>
@@ -116,19 +120,21 @@ function PracticePageInner() {
   if (practiceState === 'summary') {
     return (
       <div className="py-6 text-center">
-        <p className="text-6xl mb-4">🎉</p>
+        <div className="mx-auto mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[#EEF2FF] text-[#6D28D9]">
+          <Award size={30} />
+        </div>
         <h2 className="text-[26px] font-bold mb-2">Hotovo!</h2>
         <p className="text-[20px] text-gray-600 mb-6">{score} z {questions.length} správne</p>
         <div className="bg-[#EEF2FF] rounded-2xl p-5 mb-8">
           <p className="text-[18px] text-[#4338CA]">
-            {score === questions.length ? 'Perfektný výsledok! Si úžasná! 💜' :
-             score >= questions.length / 2 ? 'Skvelá práca! Cvič ďalej! ⭐' :
-             'Nevadí, skús znova. Každý pokus ťa posúva dopredu! 💪'}
+            {score === questions.length ? 'Perfektný výsledok! Si úžasná.' :
+             score >= questions.length / 2 ? 'Skvelá práca! Cvič ďalej.' :
+             'Nevadí, skús znova. Každý pokus ťa posúva dopredu.'}
           </p>
         </div>
         <div className="flex flex-col gap-3">
-          <button onClick={() => startSession(topic, difficulty)} className="w-full py-4 bg-[#F59E0B] text-white text-[18px] font-semibold rounded-2xl">
-            🔄 Skúsiť znova
+          <button onClick={() => startSession(topic, difficulty)} className="w-full py-4 bg-[#F59E0B] text-white text-[18px] font-semibold rounded-2xl inline-flex items-center justify-center gap-2">
+            <RefreshCw size={16} /> Skúsiť znova
           </button>
           <button onClick={() => setPracticeState('select-topic')} className="w-full py-4 border-2 border-[#6D28D9] text-[#6D28D9] text-[18px] font-semibold rounded-2xl">
             Iná téma
@@ -171,36 +177,39 @@ function PracticePageInner() {
               onClick={() => setHintsShown((h) => h + 1)}
               className="w-full py-3 border border-gray-300 rounded-xl text-gray-500 text-[15px] mb-3 hover:bg-gray-50"
             >
-              💡 Potrebujem nápovedu {hintsShown > 0 ? '(ďalšia)' : ''}
+              <span className="inline-flex items-center gap-2"><HelpCircle size={16} />Potrebujem nápovedu {hintsShown > 0 ? '(ďalšia)' : ''}</span>
             </button>
           )}
 
           {hintsShown > 0 && (
             <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-4">
-              <p className="text-[16px] text-yellow-800">💡 {currentQ.hints[hintsShown - 1]}</p>
+              <p className="text-[16px] text-yellow-800 inline-flex items-start gap-2"><HelpCircle size={16} className="mt-0.5" />{currentQ.hints[hintsShown - 1]}</p>
             </div>
           )}
 
           <button
             onClick={handleCheck}
-            disabled={!answer.trim() || loading}
-            className="w-full py-4 bg-[#F59E0B] text-white text-[18px] font-semibold rounded-2xl disabled:opacity-40"
-          >
-            {loading ? 'Kontrolujem...' : '✔️ Skontrolovať odpoveď'}
+          disabled={!answer.trim() || loading}
+          className="w-full py-4 bg-[#F59E0B] text-white text-[18px] font-semibold rounded-2xl disabled:opacity-40"
+        >
+            {loading ? 'Kontrolujem...' : 'Skontrolovať odpoveď'}
           </button>
         </>
       )}
 
       {feedback && !showSolution && (
         <div className={`rounded-2xl p-5 mb-4 ${feedback.spravne ? 'bg-[#F0FDF4] border-2 border-[#10B981]' : 'bg-orange-50 border-2 border-orange-200'}`}>
-          <p className="text-[18px] font-semibold mb-1">{feedback.spravne ? '🎉 Správne!' : attempts >= 2 ? '❌ Takmer...' : '🤔 Takmer!'}</p>
+          <p className="text-[18px] font-semibold mb-1 inline-flex items-center gap-2">
+            {feedback.spravne ? <CheckCircle size={18} /> : <AlertCircle size={18} />}
+            {feedback.spravne ? 'Správne!' : attempts >= 2 ? 'Takmer...' : 'Skús ešte raz'}
+          </p>
           <p className="text-[16px]">{feedback.sprava}</p>
         </div>
       )}
 
       {feedback && !feedback.spravne && attempts >= 2 && !showSolution && (
-        <button onClick={() => setShowSolution(true)} className="w-full py-3 border-2 border-[#6D28D9] text-[#6D28D9] font-semibold rounded-2xl mb-3">
-          Ukáž mi riešenie →
+        <button onClick={() => setShowSolution(true)} className="w-full py-3 border-2 border-[#6D28D9] text-[#6D28D9] font-semibold rounded-2xl mb-3 inline-flex items-center justify-center gap-2">
+          Ukáž mi riešenie <ArrowRight size={16} />
         </button>
       )}
 
@@ -212,14 +221,14 @@ function PracticePageInner() {
       )}
 
       {(feedback?.spravne || showSolution) && (
-        <button onClick={handleNext} className="w-full py-4 bg-[#F59E0B] text-white text-[18px] font-semibold rounded-2xl mt-2">
-          {idx + 1 >= questions.length ? 'Zobraziť výsledky →' : 'Ďalšia otázka →'}
+        <button onClick={handleNext} className="w-full py-4 bg-[#F59E0B] text-white text-[18px] font-semibold rounded-2xl mt-2 inline-flex items-center justify-center gap-2">
+          {idx + 1 >= questions.length ? 'Zobraziť výsledky' : 'Ďalšia otázka'} <ArrowRight size={16} />
         </button>
       )}
 
       {!feedback && attempts >= 2 && !showSolution && (
-        <button onClick={() => setShowSolution(true)} className="w-full py-3 text-[#6D28D9] text-[15px] mt-3">
-          Ukáž mi riešenie →
+        <button onClick={() => setShowSolution(true)} className="w-full py-3 text-[#6D28D9] text-[15px] mt-3 inline-flex items-center justify-center gap-2">
+          Ukáž mi riešenie <ArrowRight size={16} />
         </button>
       )}
     </div>

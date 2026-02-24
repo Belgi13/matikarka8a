@@ -5,6 +5,7 @@ import { getAll, deleteAll } from '@/lib/history'
 import { TOPICS } from '@/lib/questions'
 import type { HistoryEntry } from '@/lib/types'
 import StepCard from '@/components/StepCard'
+import { ArrowLeft, ArrowRight, CheckCircle, Inbox } from 'react-feather'
 
 export default function HistoryPage() {
   const [entries, setEntries] = useState<HistoryEntry[]>(() => getAll())
@@ -22,14 +23,14 @@ export default function HistoryPage() {
 
   if (selected) {
     const allSteps = [
-      { nazov: '📌 Čo vieme?', vysvetlenie: selected.solution.co_vieme, matematika: '' },
-      { nazov: '🔍 Hľadáme:', vysvetlenie: selected.solution.hladame, matematika: '' },
+      { nazov: 'Čo vieme?', vysvetlenie: selected.solution.co_vieme, matematika: '' },
+      { nazov: 'Hľadáme:', vysvetlenie: selected.solution.hladame, matematika: '' },
       ...selected.solution.kroky,
     ]
     return (
       <div className="py-6">
-        <button onClick={() => setSelected(null)} className="text-[#6D28D9] font-semibold mb-4 flex items-center gap-1">
-          ← Späť
+        <button onClick={() => setSelected(null)} className="text-[#6D28D9] font-semibold mb-4 flex items-center gap-2">
+          <ArrowLeft size={16} /> Späť
         </button>
         <div className="bg-gray-100 rounded-xl p-4 mb-6">
           <p className="text-sm text-gray-500 mb-1">Príklad:</p>
@@ -37,7 +38,7 @@ export default function HistoryPage() {
         </div>
         {allSteps.map((step, i) => <StepCard key={i} step={step} stepNumber={i + 1} />)}
         <div className="bg-[#F0FDF4] border-2 border-[#10B981] rounded-2xl p-4 text-center mt-2">
-          <p className="text-[20px] font-bold text-[#065F46]">✅ {selected.solution.odpoved}</p>
+          <p className="text-[20px] font-bold text-[#065F46] inline-flex items-center gap-2"><CheckCircle size={20} /> {selected.solution.odpoved}</p>
         </div>
       </div>
     )
@@ -58,9 +59,9 @@ export default function HistoryPage() {
 
       {filtered.length === 0 ? (
         <div className="text-center py-16 text-gray-400">
-          <p className="text-5xl mb-4">📭</p>
+          <p className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#EEF2FF] text-[#6D28D9]"><Inbox size={22} /></p>
           <p className="text-[18px]">Ešte si nič nevyriešila.</p>
-          <a href="/solve" className="text-[#6D28D9] font-semibold mt-2 block">Začni teraz! →</a>
+          <a href="/solve" className="text-[#6D28D9] font-semibold mt-2 inline-flex items-center gap-2">Začni teraz <ArrowRight size={14} /></a>
         </div>
       ) : (
         <div className="flex flex-col gap-3">

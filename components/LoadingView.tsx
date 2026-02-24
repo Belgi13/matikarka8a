@@ -3,10 +3,10 @@
 import { useEffect, useState } from 'react'
 
 const MESSAGES = [
-  'Premýšľam... 🤔',
-  'Počítam krôčky... 🧮',
-  'Skladám vysvetlenie... ✏️',
-  'Už som takmer hotová... ⭐',
+  'Premýšľam...',
+  'Počítam krôčky...',
+  'Skladám vysvetlenie...',
+  'Už som takmer hotová...',
 ]
 
 export default function LoadingView() {

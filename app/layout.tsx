@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="sk">
-      <body className={`${poppins.variable} font-poppins bg-[#FAFAFA] min-h-screen`}>
+      <body className={`${poppins.variable} font-poppins min-h-screen text-[var(--text-primary)]`}>
         <main className="max-w-2xl mx-auto px-4 pb-24 min-h-screen">
           {children}
         </main>

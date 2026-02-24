@@ -7,8 +7,10 @@ import StepCard from '@/components/StepCard'
 import ProgressDots from '@/components/ProgressDots'
 import LoadingView from '@/components/LoadingView'
 import CelebrationView from '@/components/CelebrationView'
+import VisualExplanationCsv from '@/components/VisualExplanationCsv'
 import { saveEntry } from '@/lib/history'
 import { getById } from '@/lib/questions'
+import { ArrowRight, CheckCircle, FileText, Image as ImageIcon, RefreshCw, Save, X } from 'react-feather'
 import type { Solution } from '@/lib/types'
 
 type PageState = 'input' | 'loading' | 'solution' | 'done'
@@ -22,6 +24,7 @@ function SolvePageInner() {
   const [revealAll, setRevealAll] = useState(false)
   const [error, setError] = useState('')
   const [saved, setSaved] = useState(false)
+  const [showVisualExplanation, setShowVisualExplanation] = useState(false)
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const searchParams = useSearchParams()
 
@@ -59,7 +62,7 @@ function SolvePageInner() {
 
   const handleSolve = async () => {
     if (!canSubmit) {
-      setError('Najprv napíš alebo nahraj príklad 😊')
+      setError('Najprv napíš alebo nahraj príklad.')
       return
     }
     setError('')
@@ -86,9 +89,10 @@ function SolvePageInner() {
       setSolution(data)
       setCurrentStep(0)
       setRevealAll(false)
+      setShowVisualExplanation(false)
       setState('solution')
     } catch {
-      setError('Niečo sa pokazilo. Skús to znova o chvíľu. 🛠️')
+      setError('Niečo sa pokazilo. Skús to znova o chvíľu.')
       setState('input')
     }
   }
@@ -99,6 +103,7 @@ function SolvePageInner() {
     setSolution(null)
     setError('')
     setSaved(false)
+    setShowVisualExplanation(false)
     setState('input')
     setTimeout(() => inputRef.current?.focus(), 100)
   }
@@ -113,8 +118,8 @@ function SolvePageInner() {
 
   if (state === 'solution' && solution) {
     const allSteps = [
-      { nazov: '📌 Čo vieme?', vysvetlenie: solution.co_vieme, matematika: '' },
-      { nazov: '🔍 Hľadáme:', vysvetlenie: solution.hladame, matematika: '' },
+      { nazov: 'Čo vieme?', vysvetlenie: solution.co_vieme, matematika: '' },
+      { nazov: 'Hľadáme:', vysvetlenie: solution.hladame, matematika: '' },
       ...solution.kroky,
     ]
     const isLast = currentStep >= allSteps.length - 1
@@ -136,9 +141,9 @@ function SolvePageInner() {
         {!revealAll && !isLast && (
           <button
             onClick={() => setCurrentStep((s) => s + 1)}
-            className="w-full py-4 bg-[#F59E0B] text-white text-[18px] font-semibold rounded-2xl mt-2 hover:bg-amber-500 transition-colors active:scale-95"
+            className="w-full py-4 bg-[#F59E0B] text-white text-[18px] font-semibold rounded-2xl mt-2 hover:bg-amber-500 transition-colors active:scale-95 inline-flex items-center justify-center gap-2"
           >
-            Ďalší krok →
+            Ďalší krok <ArrowRight size={16} />
           </button>
         )}
 
@@ -160,13 +165,24 @@ function SolvePageInner() {
         {revealAll && (
           <div className="mt-4">
             <div className="bg-[#F0FDF4] border-2 border-[#10B981] rounded-2xl p-5 text-center mb-4">
-              <p className="text-[20px] font-bold text-[#065F46]">✅ {solution.odpoved}</p>
+              <p className="text-[20px] font-bold text-[#065F46] inline-flex items-center gap-2"><CheckCircle size={20} /> {solution.odpoved}</p>
             </div>
             <div className="flex flex-col gap-3">
-              <button onClick={handleSave} disabled={saved} className="w-full py-3 rounded-2xl border-2 border-[#6D28D9] text-[#6D28D9] font-semibold disabled:opacity-50">
-                {saved ? '✓ Uložené' : '💾 Uložiť do histórie'}
+              <button
+                onClick={() => setShowVisualExplanation((v) => !v)}
+                className="w-full py-3 rounded-2xl border-2 border-[#C7D2FE] text-[#4F46E5] font-semibold inline-flex items-center justify-center gap-2"
+              >
+                <FileText size={16} />
+                {showVisualExplanation ? 'Skryť vizuálne vysvetlenie (CSV)' : 'Zobraziť vizuálne vysvetlenie (CSV)'}
               </button>
-              <button onClick={handleReset} className="w-full py-3 bg-[#F59E0B] text-white font-semibold rounded-2xl">🔄 Nový príklad</button>
+              {showVisualExplanation && (
+                <VisualExplanationCsv steps={allSteps} />
+              )}
+              <button onClick={handleSave} disabled={saved} className="w-full py-3 rounded-2xl border-2 border-[#6D28D9] text-[#6D28D9] font-semibold disabled:opacity-50 inline-flex items-center justify-center gap-2">
+                <Save size={16} />
+                {saved ? 'Uložené' : 'Uložiť do histórie'}
+              </button>
+              <button onClick={handleReset} className="w-full py-3 bg-[#F59E0B] text-white font-semibold rounded-2xl inline-flex items-center justify-center gap-2"><RefreshCw size={16} /> Nový príklad</button>
             </div>
           </div>
         )}
@@ -197,15 +213,18 @@ function SolvePageInner() {
         <input {...getInputProps()} />
         {imageData ? (
           <div className="flex items-center justify-center gap-3">
-            <span className="text-green-600 text-[18px]">✓ Obrázok nahraný</span>
+            <span className="text-green-600 text-[18px] inline-flex items-center gap-2"><CheckCircle size={18} /> Obrázok nahraný</span>
             <button
               onClick={(e) => { e.stopPropagation(); setImageData(null) }}
               className="text-red-400 hover:text-red-600 font-bold text-xl"
-            >✕</button>
+              aria-label="Odstrániť obrázok"
+            ><X size={18} /></button>
           </div>
         ) : (
           <>
-            <p className="text-4xl mb-2">📷</p>
+            <p className="mb-2 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#EEF2FF] text-[#6D28D9]">
+              <ImageIcon size={22} />
+            </p>
             <p className="text-[18px] text-gray-500">Nahraj foto príkladu</p>
             <p className="text-sm text-gray-400 mt-1">klikni alebo presuň obrázok sem · max 10 MB</p>
           </>
@@ -217,9 +236,9 @@ function SolvePageInner() {
       <button
         onClick={handleSolve}
         disabled={!canSubmit}
-        className="w-full mt-6 py-4 bg-[#F59E0B] text-white text-[20px] font-bold rounded-2xl shadow-md hover:bg-amber-500 transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+        className="w-full mt-6 py-4 bg-[#F59E0B] text-white text-[20px] font-bold rounded-2xl shadow-md hover:bg-amber-500 transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
       >
-        ✨ Vyriešiť
+        <ArrowRight size={18} /> Vyriešiť
       </button>
     </div>
   )

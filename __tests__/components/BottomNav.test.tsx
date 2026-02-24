@@ -17,7 +17,7 @@ describe('BottomNav', () => {
   it('highlights the active tab', () => {
     render(<BottomNav />)
     const activeLink = screen.getByText('Vyriešiť').closest('a')
-    expect(activeLink).toHaveClass('text-[#6D28D9]')
+    expect(activeLink).toHaveClass('text-[var(--brand-primary)]')
   })
 
   it('renders Teória tab linking to /theory', () => {

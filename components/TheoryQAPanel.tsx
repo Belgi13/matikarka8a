@@ -1,5 +1,6 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
+import { MessageCircle, Send } from 'react-feather'
 
 interface Message { role: 'student' | 'ai'; text: string }
 
@@ -29,14 +30,17 @@ export default function TheoryQAPanel({ theoryId, imageFile }: { theoryId: strin
       const data = await res.json()
       setMessages((prev) => [...prev, { role: 'ai', text: data.answer }])
     } catch {
-      setError('Niečo sa pokazilo. Skús to znova. 🛠️')
+      setError('Niečo sa pokazilo. Skús to znova.')
     }
     setLoading(false)
   }
 
   return (
     <div className="mt-8 border-t border-gray-200 pt-6">
-      <h3 className="text-[18px] font-bold text-[#111827] mb-4">💬 Opýtaj sa Matikárku</h3>
+      <h3 className="text-[18px] font-bold text-[#111827] mb-4 inline-flex items-center gap-2">
+        <MessageCircle size={18} />
+        Opýtaj sa Matikárku
+      </h3>
       {messages.length > 0 && (
         <div className="flex flex-col gap-3 mb-4 max-h-80 overflow-y-auto">
           {messages.map((msg, i) => (
@@ -73,9 +77,9 @@ export default function TheoryQAPanel({ theoryId, imageFile }: { theoryId: strin
         <button
           onClick={handleSend}
           disabled={!input.trim() || loading}
-          className="py-3 px-5 bg-[#6D28D9] text-white text-[16px] font-semibold rounded-2xl hover:bg-purple-700 transition-colors active:scale-95 disabled:opacity-40 flex-shrink-0"
+          className="py-3 px-5 bg-[#6D28D9] text-white text-[16px] font-semibold rounded-2xl hover:bg-purple-700 transition-colors active:scale-95 disabled:opacity-40 flex-shrink-0 inline-flex items-center gap-2"
         >
-          Pýtam →
+          Pýtam <Send size={14} />
         </button>
       </div>
     </div>
