@@ -4,8 +4,9 @@ import { useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { getByTopicAndDifficulty, getById, TOPICS } from '@/lib/questions'
 import TopicIcon from '@/components/TopicIcon'
-import { AlertCircle, ArrowLeft, ArrowRight, Award, CheckCircle, HelpCircle, RefreshCw } from 'react-feather'
-import type { Question } from '@/lib/types'
+import VisualExplanationLab from '@/components/VisualExplanationLab'
+import { AlertCircle, ArrowLeft, ArrowRight, Award, CheckCircle, HelpCircle, RefreshCw, Sliders } from 'react-feather'
+import type { Question, Solution, SolutionStep } from '@/lib/types'
 
 type PracticeState = 'select-topic' | 'select-difficulty' | 'question' | 'summary'
 
@@ -22,6 +23,7 @@ function PracticePageInner() {
   const [hintsShown, setHintsShown] = useState(0)
   const [feedback, setFeedback] = useState<{ spravne: boolean; sprava: string } | null>(null)
   const [showSolution, setShowSolution] = useState(false)
+  const [showVisualLab, setShowVisualLab] = useState(false)
   const [score, setScore] = useState(0)
   const [loading, setLoading] = useState(false)
 
@@ -38,6 +40,7 @@ function PracticePageInner() {
     setAttempts(0)
     setHintsShown(0)
     setShowSolution(false)
+    setShowVisualLab(false)
     setPracticeState('question')
   }
 
@@ -74,6 +77,7 @@ function PracticePageInner() {
       setAttempts(0)
       setHintsShown(0)
       setShowSolution(false)
+      setShowVisualLab(false)
     }
   }
 
@@ -147,6 +151,24 @@ function PracticePageInner() {
   const currentQ = questions[idx]
   if (!currentQ) return null
 
+  const labSolution: Solution = {
+    co_vieme: currentQ.text,
+    hladame: 'Nájdi správny výsledok.',
+    kroky: currentQ.hints.map((hint, i) => ({
+      nazov: `Nápoveda ${i + 1}`,
+      vysvetlenie: hint,
+      matematika: '',
+    })),
+    odpoved: showSolution || feedback?.spravne ? currentQ.answer : '',
+    pochvala: '',
+  }
+
+  const labSteps: SolutionStep[] = [
+    { nazov: 'Čo vieme?', vysvetlenie: labSolution.co_vieme, matematika: '' },
+    { nazov: 'Hľadáme:', vysvetlenie: labSolution.hladame, matematika: '' },
+    ...labSolution.kroky,
+  ]
+
   return (
     <div className="py-6">
       <div className="flex items-center justify-between mb-4">
@@ -160,6 +182,20 @@ function PracticePageInner() {
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-5">
         <p className="text-[18px] text-[#111827] leading-relaxed">{currentQ.text}</p>
       </div>
+
+      <button
+        onClick={() => setShowVisualLab((v) => !v)}
+        className="w-full mb-4 py-3 rounded-2xl border-2 border-[#C7D2FE] text-[#4F46E5] font-semibold inline-flex items-center justify-center gap-2"
+      >
+        <Sliders size={16} />
+        {showVisualLab ? 'Skryť vizuálne laboratórium' : 'Zobraziť vizuálne laboratórium'}
+      </button>
+
+      {showVisualLab && (
+        <div className="mb-5">
+          <VisualExplanationLab problem={currentQ.text} solution={labSolution} steps={labSteps} />
+        </div>
+      )}
 
       {!feedback && !showSolution && (
         <>
