@@ -34,7 +34,7 @@ export const THEORY_SECTIONS: TheorySection[] = [
         properties: [
           'Všetky štyri strany sú rovnako dlhé (zhodné)',
           'Všetky vnútorné uhly = 90°',
-          'Uhlopriečky sú zhodné, navzájom kolmé a rozopínajú sa',
+          'Uhlopriečky sú zhodné, navzájom kolmé a rozpoľujú sa (delia na póly)',
         ],
         formulas: [
           { label: 'Obvod', formula: 'o = 4a' },
@@ -47,7 +47,7 @@ export const THEORY_SECTIONS: TheorySection[] = [
           'Protiľahlé strany sú rovnobežné a rovnako dlhé',
           'Susedné strany sú navzájom kolmé',
           'Všetky vnútorné uhly = 90°',
-          'Uhlopriečky sú zhodné a rozopínajú sa',
+          'Uhlopriečky sú zhodné a rozpoľujú sa (delia na póly)',
         ],
         formulas: [
           { label: 'Obvod', formula: 'o = 2 · (a + b)' },
@@ -61,7 +61,7 @@ export const THEORY_SECTIONS: TheorySection[] = [
           'Vnútorné uhly nie sú 90° (strany nie sú kolmé)',
           'Protiľahlé uhly sú zhodné',
           'Súčet uhlov pri jednom ramene = 180°',
-          'Uhlopriečky sú navzájom kolmé, rozopínajú sa, ale nie sú rovnako dlhé',
+          'Uhlopriečky sú navzájom kolmé, rozpoľujú sa (delia na póly), ale nie sú rovnako dlhé',
           'Výška = kolmá vzdialenosť protiľahlých strán',
         ],
         formulas: [
@@ -77,7 +77,7 @@ export const THEORY_SECTIONS: TheorySection[] = [
           'Susedné strany nie sú kolmé na seba',
           'Protiľahlé uhly sú zhodné',
           'Súčet uhlov pri jednom ramene = 180°',
-          'Uhlopriečky rozopínajú sa a sú rovnako dlhé, ale nie sú kolmé',
+          'Uhlopriečky rozpoľujú sa (delia na póly) a sú rovnako dlhé, ale nie sú kolmé',
           'Má dve rôzne výšky (vₐ a v_b)',
         ],
         formulas: [
