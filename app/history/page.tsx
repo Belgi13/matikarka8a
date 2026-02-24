@@ -1,18 +1,16 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { getAll, deleteAll } from '@/lib/history'
 import { TOPICS } from '@/lib/questions'
 import type { HistoryEntry } from '@/lib/types'
 import StepCard from '@/components/StepCard'
 
 export default function HistoryPage() {
-  const [entries, setEntries] = useState<HistoryEntry[]>([])
+  const [entries, setEntries] = useState<HistoryEntry[]>(() => getAll())
   const [filter, setFilter] = useState('all')
   const [selected, setSelected] = useState<HistoryEntry | null>(null)
   const [showConfirm, setShowConfirm] = useState(false)
-
-  useEffect(() => { setEntries(getAll()) }, [])
 
   const filtered = filter === 'all' ? entries : entries.filter((e) => e.topic === filter)
 

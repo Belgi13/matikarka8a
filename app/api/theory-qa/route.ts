@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { openai } from '@/lib/openai'
-import { readFile } from 'fs/promises'
-import path from 'path'
+import type { ChatCompletionContentPart } from 'openai/resources'
 
 export const maxDuration = 60
 
@@ -17,7 +16,7 @@ PRAVIDLÁ:
 
 export async function POST(req: NextRequest) {
   try {
-    const { question, theoryId, imageFile } = await req.json()
+    const { question, imageFile } = await req.json()
 
     if (!question?.trim()) {
       return NextResponse.json({ error: 'Chýba otázka' }, { status: 400 })
@@ -27,21 +26,22 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Neplatný obrázok' }, { status: 400 })
     }
 
-    const imagePath = path.join(process.cwd(), 'public', 'theory', imageFile)
-    const imageBuffer = await readFile(imagePath)
+    const siteUrl = process.env.URL ?? 'http://localhost:3000'
+    const imageRes = await fetch(`${siteUrl}/theory/${imageFile}`)
+    if (!imageRes.ok) throw new Error('Image fetch failed')
+    const imageBuffer = Buffer.from(await imageRes.arrayBuffer())
     const imageBase64 = imageBuffer.toString('base64')
+
+    const content: ChatCompletionContentPart[] = [
+      { type: 'image_url', image_url: { url: `data:image/png;base64,${imageBase64}`, detail: 'high' } },
+      { type: 'text', text: question },
+    ]
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o',
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
-        {
-          role: 'user',
-          content: [
-            { type: 'image_url', image_url: { url: `data:image/png;base64,${imageBase64}`, detail: 'high' } },
-            { type: 'text', text: question },
-          ] as any,
-        },
+        { role: 'user', content },
       ],
       temperature: 0.4,
       max_tokens: 300,

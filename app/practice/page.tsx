@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { getByTopicAndDifficulty, getById, TOPICS } from '@/lib/questions'
 import type { Question } from '@/lib/types'
@@ -9,10 +9,11 @@ type PracticeState = 'select-topic' | 'select-difficulty' | 'question' | 'summar
 
 function PracticePageInner() {
   const searchParams = useSearchParams()
-  const [practiceState, setPracticeState] = useState<PracticeState>('select-topic')
-  const [topic, setTopic] = useState('')
-  const [difficulty, setDifficulty] = useState<1 | 2>(1)
-  const [questions, setQuestions] = useState<Question[]>([])
+  const initialQ = (() => { const id = searchParams.get('q'); return id ? getById(id) : null })()
+  const [practiceState, setPracticeState] = useState<PracticeState>(initialQ ? 'question' : 'select-topic')
+  const [topic, setTopic] = useState(initialQ?.topic ?? '')
+  const [difficulty, setDifficulty] = useState<1 | 2>(initialQ?.difficulty ?? 1)
+  const [questions, setQuestions] = useState<Question[]>(initialQ ? [initialQ] : [])
   const [idx, setIdx] = useState(0)
   const [answer, setAnswer] = useState('')
   const [attempts, setAttempts] = useState(0)
@@ -21,20 +22,6 @@ function PracticePageInner() {
   const [showSolution, setShowSolution] = useState(false)
   const [score, setScore] = useState(0)
   const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    const qId = searchParams.get('q')
-    if (qId) {
-      const q = getById(qId)
-      if (q) {
-        setTopic(q.topic)
-        setDifficulty(q.difficulty)
-        setQuestions([q])
-        setIdx(0)
-        setPracticeState('question')
-      }
-    }
-  }, []) // eslint-disable-line
 
   const startSession = (t: string, d: 1 | 2) => {
     const pool = getByTopicAndDifficulty(t, d)
@@ -127,7 +114,6 @@ function PracticePageInner() {
   }
 
   if (practiceState === 'summary') {
-    const topicMeta = TOPICS.find((t) => t.id === topic)
     return (
       <div className="py-6 text-center">
         <p className="text-6xl mb-4">🎉</p>

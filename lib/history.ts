@@ -1,4 +1,4 @@
-import type { HistoryEntry, Solution } from './types'
+import type { HistoryEntry } from './types'
 
 const STORAGE_KEY = 'matikarka_history'
 

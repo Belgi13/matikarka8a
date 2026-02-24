@@ -1,6 +1,7 @@
 /**
  * @jest-environment node
  */
+import type { NextRequest } from 'next/server'
 import { POST } from '@/app/api/validate/route'
 
 const mockCreate = jest.fn()
@@ -18,7 +19,7 @@ describe('POST /api/validate', () => {
       body: JSON.stringify({ problem: '2x+5=13', studentAnswer: 'x=4', correctAnswer: 'x=4' }),
       headers: { 'Content-Type': 'application/json' },
     })
-    const res = await POST(req as any)
+    const res = await POST(req as unknown as NextRequest)
     const data = await res.json()
     expect(data.spravne).toBe(true)
     expect(data.sprava).toBeTruthy()
@@ -33,7 +34,7 @@ describe('POST /api/validate', () => {
       body: JSON.stringify({ problem: '2x+5=13', studentAnswer: 'x=5', correctAnswer: 'x=4' }),
       headers: { 'Content-Type': 'application/json' },
     })
-    const res = await POST(req as any)
+    const res = await POST(req as unknown as NextRequest)
     const data = await res.json()
     expect(data.spravne).toBe(false)
   })

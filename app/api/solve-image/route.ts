@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { openai } from '@/lib/openai'
 import { SYSTEM_PROMPT, IMAGE_PREFIX } from '@/lib/prompts'
 import type { Solution } from '@/lib/types'
+import type { ChatCompletionContentPart } from 'openai/resources'
 
 export const maxDuration = 60
 
@@ -13,7 +14,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Chýba obrázok' }, { status: 400 })
     }
 
-    const userContent: Array<{ type: string; text?: string; image_url?: { url: string; detail: string } }> = [
+    const userContent: ChatCompletionContentPart[] = [
       {
         type: 'image_url',
         image_url: {
@@ -31,7 +32,7 @@ export async function POST(req: NextRequest) {
       model: 'gpt-4o',
       messages: [
         { role: 'system', content: `${SYSTEM_PROMPT}\n\n${IMAGE_PREFIX}` },
-        { role: 'user', content: userContent as any },
+        { role: 'user', content: userContent },
       ],
       response_format: { type: 'json_object' },
       temperature: 0.3,

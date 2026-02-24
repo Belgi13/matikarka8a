@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import confetti from 'canvas-confetti'
 
 const PRAISES = [
@@ -22,7 +22,7 @@ interface Props {
 }
 
 export default function CelebrationView({ answer, praise, onReset, onSave }: Props) {
-  const randomPraise = PRAISES[Math.floor(Math.random() * PRAISES.length)]
+  const [randomPraise] = useState(() => PRAISES[Math.floor(Math.random() * PRAISES.length)])
 
   useEffect(() => {
     confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } })

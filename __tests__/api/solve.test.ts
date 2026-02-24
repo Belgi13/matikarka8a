@@ -1,6 +1,7 @@
 /**
  * @jest-environment node
  */
+import type { NextRequest } from 'next/server'
 import { POST } from '@/app/api/solve/route'
 
 // Mock OpenAI
@@ -36,7 +37,7 @@ describe('POST /api/solve', () => {
       body: JSON.stringify({ problem: '2x + 5 = 13' }),
       headers: { 'Content-Type': 'application/json' },
     })
-    const res = await POST(req as any)
+    const res = await POST(req as unknown as NextRequest)
     const data = await res.json()
 
     expect(res.status).toBe(200)
@@ -51,7 +52,7 @@ describe('POST /api/solve', () => {
       body: JSON.stringify({ problem: '' }),
       headers: { 'Content-Type': 'application/json' },
     })
-    const res = await POST(req as any)
+    const res = await POST(req as unknown as NextRequest)
     expect(res.status).toBe(400)
   })
 })
