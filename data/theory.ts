@@ -30,7 +30,7 @@ export const THEORY_SECTIONS: TheorySection[] = [
     notes: ['Súčet uhlov v štvoruholníku je vždy 360°.'],
     shapes: [
       {
-        name: 'ŠTVOREC', emoji: '🟪',
+        name: 'ŠTVOREC',
         properties: [
           'Všetky štyri strany sú rovnako dlhé (zhodné)',
           'Všetky vnútorné uhly = 90°',
@@ -55,7 +55,7 @@ export const THEORY_SECTIONS: TheorySection[] = [
         ],
       },
       {
-        name: 'KOSOŠTVOREC', emoji: '🔷',
+        name: 'KOSOŠTVOREC',
         properties: [
           'Všetky štyri strany sú rovnako dlhé',
           'Vnútorné uhly nie sú 90° (strany nie sú kolmé)',
@@ -86,7 +86,7 @@ export const THEORY_SECTIONS: TheorySection[] = [
         ],
       },
       {
-        name: 'LICHOBEŽNÍK', emoji: '🔺',
+        name: 'LICHOBEŽNÍK',
         properties: [
           'Dve protiľahlé strany sú rovnobežné → nazývajú sa základne (a, c)',
           'Dve protiľahlé strany sú rôznobežné → nazývajú sa ramená (b, d)',

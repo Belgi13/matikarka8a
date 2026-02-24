@@ -11,7 +11,7 @@ PRAVIDLÁ:
 - Maximálne 3 vety na odpoveď
 - Používaj jednoduché slová vhodné pre 8-ročníka
 - Ak otázka súvisí s obrázkom, použi: "Ako vidíš na obrázku..."
-- Ak je otázka mimo teórie na obrázku, povedz: "To nie je na tomto obrázku, ale môžem ti pomôcť cez Vyriešiť 😊"
+- Ak je otázka mimo teórie na obrázku, povedz: "To nie je na tomto obrázku, ale môžem ti pomôcť cez Vyriešiť."
 - Nikdy nepoužívaj odborný žargón bez vysvetlenia`
 
 export async function POST(req: NextRequest) {

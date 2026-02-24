@@ -4,14 +4,14 @@ import type { Question } from './types'
 const questions = questionsData as Question[]
 
 export const TOPICS = [
-  { id: 'rovnice',      label: 'Rovnice (jednoduché)',    icon: '➕' },
-  { id: 'zlomky',      label: 'Rovnice so zlomkami',     icon: '➗' },
-  { id: 'slovne',      label: 'Slovné úlohy',            icon: '📝' },
-  { id: 'trojuholnik', label: 'Zostrojenie trojuholníka', icon: '📐' },
-  { id: 'stvoruholnik',label: 'Štvorec a obdĺžnik',      icon: '📏' },
-  { id: 'lichobeznik', label: 'Lichobežník',              icon: '🔶' },
-  { id: 'obvod',       label: 'Obvod a obsah',           icon: '📊' },
-  { id: 'vyska',       label: 'Výška v trojuholníku',    icon: '↕️' },
+  { id: 'rovnice', label: 'Rovnice (jednoduché)' },
+  { id: 'zlomky', label: 'Rovnice so zlomkami' },
+  { id: 'slovne', label: 'Slovné úlohy' },
+  { id: 'trojuholnik', label: 'Zostrojenie trojuholníka' },
+  { id: 'stvoruholnik', label: 'Štvorec a obdĺžnik' },
+  { id: 'lichobeznik', label: 'Lichobežník' },
+  { id: 'obvod', label: 'Obvod a obsah' },
+  { id: 'vyska', label: 'Výška v trojuholníku' },
 ]
 
 export function getByTopic(topic: string): Question[] {

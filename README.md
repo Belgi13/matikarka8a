@@ -100,9 +100,9 @@ npm run test:watch
 
 Aktuálny stav v tomto repozitári:
 
-- `npm test` ✅ (7 test suites, 25 testov)
-- `npm run lint` ✅
-- `npm run build` ✅
+- `npm test` (7 test suites, 25 testov) - passed
+- `npm run lint` - passed
+- `npm run build` - passed
 
 ## Poznámky
 
