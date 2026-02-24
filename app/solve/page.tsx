@@ -7,7 +7,7 @@ import StepCard from '@/components/StepCard'
 import ProgressDots from '@/components/ProgressDots'
 import LoadingView from '@/components/LoadingView'
 import CelebrationView from '@/components/CelebrationView'
-import VisualExplanationCsv from '@/components/VisualExplanationCsv'
+import VisualExplanationLab from '@/components/VisualExplanationLab'
 import { saveEntry } from '@/lib/history'
 import { getById } from '@/lib/questions'
 import { ArrowRight, CheckCircle, FileText, Image as ImageIcon, RefreshCw, Save, X } from 'react-feather'
@@ -173,10 +173,10 @@ function SolvePageInner() {
                 className="w-full py-3 rounded-2xl border-2 border-[#C7D2FE] text-[#4F46E5] font-semibold inline-flex items-center justify-center gap-2"
               >
                 <FileText size={16} />
-                {showVisualExplanation ? 'Skryť vizuálne vysvetlenie (CSV)' : 'Zobraziť vizuálne vysvetlenie (CSV)'}
+                {showVisualExplanation ? 'Skryť vizuálne laboratórium' : 'Zobraziť vizuálne laboratórium'}
               </button>
               {showVisualExplanation && (
-                <VisualExplanationCsv steps={allSteps} />
+                <VisualExplanationLab problem={problem} solution={solution} steps={allSteps} />
               )}
               <button onClick={handleSave} disabled={saved} className="w-full py-3 rounded-2xl border-2 border-[#6D28D9] text-[#6D28D9] font-semibold disabled:opacity-50 inline-flex items-center justify-center gap-2">
                 <Save size={16} />
