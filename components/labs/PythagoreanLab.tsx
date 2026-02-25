@@ -1,14 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 
-export default function PythagoreanLab() {
-    const [a, setA] = useState(3)
-    const [b, setB] = useState(4)
+export default function PythagoreanLab({ initialA = 3, initialB = 4 }: { initialA?: number, initialB?: number }) {
+    const [a, setA] = useState(initialA)
+    const [b, setB] = useState(initialB)
 
-    const c = Math.sqrt(a * a + b * b)
-    const scale = 25 // pixels per unit
+    const c = useMemo(() => Math.sqrt(a * a + b * b), [a, b])
+    const scale = useMemo(() => Math.min(30, 150 / Math.max(a, b, 1)), [a, b])
 
     return (
         <div className="flex flex-col gap-6 p-4 bg-white rounded-2xl shadow-sm border border-[var(--brand-soft)]">
