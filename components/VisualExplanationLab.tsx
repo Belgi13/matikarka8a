@@ -2,11 +2,15 @@
 
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { BarChart2, Grid, Minus, Sliders } from 'react-feather'
+import { BarChart2, Grid } from 'react-feather'
 import type { Solution, SolutionStep } from '@/lib/types'
 import VisualExplanationCsv from '@/components/VisualExplanationCsv'
+import BalanceScaleLab from './labs/BalanceScaleLab'
+import PythagoreanLab from './labs/PythagoreanLab'
+import CircleLab from './labs/CircleLab'
+import PrismLab from './labs/PrismLab'
 
-type LabType = 'equation' | 'fraction' | 'geometry' | 'general'
+type LabType = 'equation' | 'fraction' | 'geometry' | 'pythagoras' | 'circle' | 'prism' | 'general'
 type ViewMode = 'interactive' | 'csv'
 
 export default function VisualExplanationLab({
@@ -36,17 +40,15 @@ export default function VisualExplanationLab({
       <div className="mb-4 grid grid-cols-2 gap-2 rounded-xl bg-[#F8FAFF] p-1">
         <button
           onClick={() => setMode('interactive')}
-          className={`rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
-            mode === 'interactive' ? 'bg-white text-[#4F46E5] shadow-sm' : 'text-[#6B7280]'
-          }`}
+          className={`rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${mode === 'interactive' ? 'bg-white text-[#4F46E5] shadow-sm' : 'text-[#6B7280]'
+            }`}
         >
           Interaktívne
         </button>
         <button
           onClick={() => setMode('csv')}
-          className={`rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
-            mode === 'csv' ? 'bg-white text-[#4F46E5] shadow-sm' : 'text-[#6B7280]'
-          }`}
+          className={`rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${mode === 'csv' ? 'bg-white text-[#4F46E5] shadow-sm' : 'text-[#6B7280]'
+            }`}
         >
           CSV štýl
         </button>
@@ -56,7 +58,10 @@ export default function VisualExplanationLab({
         <VisualExplanationCsv steps={steps} />
       ) : (
         <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }}>
-          {labType === 'equation' && <EquationLab source={problem} />}
+          {labType === 'equation' && <EquationLabWrapper source={problem} />}
+          {labType === 'pythagoras' && <PythagoreanLab />}
+          {labType === 'circle' && <CircleLab />}
+          {labType === 'prism' && <PrismLab />}
           {labType === 'fraction' && <FractionLab source={problem} />}
           {labType === 'geometry' && <GeometryLab />}
           {labType === 'general' && <GeneralLab source={problem} />}
@@ -66,50 +71,22 @@ export default function VisualExplanationLab({
   )
 }
 
-function EquationLab({ source }: { source: string }) {
+// EquationLabWrapper detects and parses the equation, 
+// then hands it over to the specialized BalanceScaleLab
+function EquationLabWrapper({ source }: { source: string }) {
   const parsed = useMemo(() => parseLinearEquation(source), [source])
-  const [x, setX] = useState(1)
 
   if (!parsed) {
     return <GeneralLab source={source} />
   }
 
-  const left = parsed.leftA * x + parsed.leftB
-  const right = parsed.rightA * x + parsed.rightB
-  const diff = left - right
-  const maxAbs = Math.max(1, Math.abs(left), Math.abs(right))
-  const eqNow = diff === 0
-
-  return (
-    <div className="space-y-4">
-      <p className="rounded-xl bg-[#EEF2FF] px-3 py-2 text-sm font-semibold text-[#4338CA]">{parsed.raw}</p>
-
-      <div className="rounded-xl border border-[#E5E7EB] p-3">
-        <div className="mb-2 flex items-center justify-between">
-          <span className="text-sm font-semibold text-[#374151] inline-flex items-center gap-2"><Sliders size={14} /> Posuň x</span>
-          <span className="text-sm font-bold text-[#4F46E5]">x = {x}</span>
-        </div>
-        <input
-          type="range"
-          min={-12}
-          max={12}
-          value={x}
-          onChange={(e) => setX(Number(e.target.value))}
-          className="w-full accent-[#4F46E5]"
-        />
-      </div>
-
-      <div className="grid grid-cols-[1fr_auto_1fr] items-end gap-3 rounded-xl bg-[#F8FAFF] p-3">
-        <ScaleColumn label="Ľavá strana" value={left} maxAbs={maxAbs} color="#4F46E5" />
-        <Minus size={20} className={eqNow ? 'text-[#16A34A]' : 'text-[#9CA3AF]'} />
-        <ScaleColumn label="Pravá strana" value={right} maxAbs={maxAbs} color="#F97316" />
-      </div>
-
-      <p className={`text-sm font-semibold ${eqNow ? 'text-[#16A34A]' : 'text-[#B45309]'}`}>
-        {eqNow ? 'Rovnováha: obe strany sú rovnaké.' : `Rozdiel strán: ${diff > 0 ? '+' : ''}${diff}`}
-      </p>
-    </div>
-  )
+  return <BalanceScaleLab
+    leftA={parsed.leftA}
+    leftB={parsed.leftB}
+    rightA={parsed.rightA}
+    rightB={parsed.rightB}
+    initialX={1}
+  />
 }
 
 function FractionLab({ source }: { source: string }) {
@@ -208,6 +185,7 @@ function GeneralLab({ source }: { source: string }) {
   )
 }
 
+// Keep ScaleColumn for reference or if needed later, but it's currently unused
 function ScaleColumn({ label, value, maxAbs, color }: { label: string; value: number; maxAbs: number; color: string }) {
   const ratio = Math.min(1, Math.abs(value) / maxAbs)
   const height = 26 + ratio * 74
@@ -248,6 +226,9 @@ function FractionBar({ n, d, label, color }: { n: number; d: number; label: stri
 function detectLabType(problem: string, solution: Solution): LabType {
   const text = `${problem} ${solution.co_vieme} ${solution.hladame} ${solution.kroky.map((k) => `${k.nazov} ${k.vysvetlenie} ${k.matematika}`).join(' ')}`.toLowerCase()
 
+  if (/pytagor|pythagor|prepona|odvesna|\ba\^2\s*\+\s*b\^2\b/.test(text)) return 'pythagoras'
+  if (/kruh|kružn|polomer|priemer|obvod kru|obsah kru| \bpi\b | \bπ\b/.test(text)) return 'circle'
+  if (/hranol|ihlan|kocka|kváder|objem|povrch/.test(text)) return 'prism'
   if (/(=).*[xk]|[xk].*=/.test(text)) return 'equation'
   if (/\d+\s*\/\s*\d+|zlomk/.test(text)) return 'fraction'
   if (/trojuhol|štvorec|obdĺž|lichobe|obvod|obsah|geometr/.test(text)) return 'geometry'
@@ -258,6 +239,9 @@ function labelForType(type: LabType) {
   if (type === 'equation') return 'Rovnica'
   if (type === 'fraction') return 'Zlomky'
   if (type === 'geometry') return 'Geometria'
+  if (type === 'pythagoras') return 'Pytagorova veta'
+  if (type === 'circle') return 'Kruh'
+  if (type === 'prism') return 'Hranol/Objem'
   return 'Čísla'
 }
 
