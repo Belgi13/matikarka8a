@@ -38,6 +38,29 @@ function SolvePageInner() {
     }
   }, []) // eslint-disable-line
 
+  useEffect(() => {
+    const handlePaste = (e: ClipboardEvent) => {
+      const items = e.clipboardData?.items
+      if (!items) return
+      for (const item of Array.from(items)) {
+        if (item.type.startsWith('image/')) {
+          const file = item.getAsFile()
+          if (!file) continue
+          const reader = new FileReader()
+          reader.onload = (ev) => {
+            const base64 = (ev.target?.result as string).split(',')[1]
+            setImageData({ base64, mimeType: item.type })
+            setError('')
+          }
+          reader.readAsDataURL(file)
+          break
+        }
+      }
+    }
+    window.addEventListener('paste', handlePaste)
+    return () => window.removeEventListener('paste', handlePaste)
+  }, [])
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: { 'image/*': ['.jpg', '.jpeg', '.png', '.heic', '.webp'] },
     maxSize: 10 * 1024 * 1024,
@@ -226,7 +249,7 @@ function SolvePageInner() {
               <ImageIcon size={22} />
             </p>
             <p className="text-[18px] text-gray-500">Nahraj foto príkladu</p>
-            <p className="text-sm text-gray-400 mt-1">klikni alebo presuň obrázok sem · max 10 MB</p>
+            <p className="text-sm text-gray-400 mt-1">klikni, presuň obrázok alebo stlač Ctrl+V  ·  max 10 MB</p>
           </>
         )}
       </div>
