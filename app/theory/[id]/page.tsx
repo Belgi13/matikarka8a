@@ -5,6 +5,7 @@ import TheoryShapeCard from '@/components/TheoryShapeCard'
 import TheoryImageToggle from '@/components/TheoryImageToggle'
 import TheoryQAPanel from '@/components/TheoryQAPanel'
 import { AlertTriangle, ArrowLeft } from 'react-feather'
+import TheoryLabWrapper from '@/components/labs/TheoryLabWrapper'
 
 export default async function TheoryDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -33,6 +34,8 @@ export default async function TheoryDetailPage({ params }: { params: Promise<{ i
       {section.shapes.map((shape, i) => (
         <TheoryShapeCard key={i} shape={shape} />
       ))}
+
+      <TheoryLabWrapper id={section.id} />
 
       <TheoryImageToggle imageFile={section.imageFile} title={section.title} />
       <TheoryQAPanel theoryId={section.id} imageFile={section.imageFile} />

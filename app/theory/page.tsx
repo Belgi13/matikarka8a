@@ -38,8 +38,18 @@ export default function TheoryPage() {
               href={`/theory/${section.id}`}
               className="bg-[var(--bg-surface-1)] rounded-[var(--radius-lg)] shadow-[var(--shadow-soft)] border border-white p-5 hover:border-[var(--brand-soft)] hover:-translate-y-0.5 transition-all duration-200 active:scale-[0.98] flex items-start gap-4"
             >
-              <div className="w-14 h-14 rounded-[var(--radius-md)] bg-[var(--bg-surface-2)] flex items-center justify-center flex-shrink-0 text-[var(--brand-primary)]">
+              <div className="w-14 h-14 rounded-[var(--radius-md)] bg-[var(--bg-surface-2)] flex items-center justify-center flex-shrink-0 text-[var(--brand-primary)] relative">
                 <BookOpen size={26} />
+                {['stvoruholniky', 'trojuholnik', 'priklady-stvoruholniky'].includes(section.id) && (
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute -top-1 -right-1 w-5 h-5 bg-[var(--brand-accent)] rounded-full border-2 border-white flex items-center justify-center text-[10px] text-white"
+                    title="Interaktívne Lab k dispozícii"
+                  >
+                    🧪
+                  </motion.div>
+                )}
               </div>
               <div className="flex-1 min-w-0">
                 <h2 className="text-[18px] font-bold text-[var(--text-primary)] mb-1">{section.title}</h2>
